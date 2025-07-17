@@ -135,24 +135,16 @@ jobs:
               <div class="card">
                   <h2>Features</h2>
                   <div class="feature">
-                      <span class="feature-icon">⚡</span>
-                      <span>Automated operating expenses calculation and data transfer</span>
-                  </div>
-                  <div class="feature">
-                      <span class="feature-icon">🎯</span>
-                      <span>Professional ribbon interface with building-themed icons</span>
+                      <span class="feature-icon">📋</span>
+                      <span>Copy Outputs sheet cashflow to Engineering sheet cashflow</span>
                   </div>
                   <div class="feature">
                       <span class="feature-icon">🔄</span>
-                      <span>Forces Excel recalculation even in Manual mode</span>
+                      <span>Forces Excel recalculation before copying</span>
                   </div>
                   <div class="feature">
-                      <span class="feature-icon">📊</span>
-                      <span>Clean taskpane interface with real-time status updates</span>
-                  </div>
-                  <div class="feature">
-                      <span class="feature-icon">🛡️</span>
-                      <span>Comprehensive error handling and user feedback</span>
+                      <span class="feature-icon">🎯</span>
+                      <span>Simple ribbon button interface</span>
                   </div>
               </div>
 
