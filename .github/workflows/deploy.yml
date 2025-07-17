@@ -194,10 +194,15 @@ jobs:
           </html>
           EOF
 
-      - name: Update manifest URLs
+      - name: Setup GitHub Pages manifest
         run: |
-          # Update manifest.xml with GitHub Pages URLs
-          sed -i 's|https://localhost:3000|https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}|g' docs/manifest.xml
+          # Copy GitHub-specific manifest as the main manifest.xml for client download
+          cp manifest-github.xml docs/manifest.xml
+
+          # Verify the manifest has correct GitHub Pages URLs
+          echo "✅ GitHub Pages manifest ready for client download"
+          echo "📋 Manifest URLs:"
+          grep -o 'https://[^"]*' docs/manifest.xml | head -5
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

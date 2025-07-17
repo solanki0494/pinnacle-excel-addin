@@ -112,9 +112,9 @@ const targetRange = engineeringSheet.getRange("O32:CI35");
 
 ## Deployment
 
-### Automated GitHub Pages Deployment
+### Option 1: Automated GitHub Pages Deployment (Recommended)
 
-**Fully automated serverless deployment!** No servers, no custom scripts, no manual steps:
+**Fully automated serverless deployment!** No servers, no manual steps:
 
 1. **One-time setup:**
    - Go to repository Settings > Pages
@@ -131,11 +131,31 @@ const targetRange = engineeringSheet.getRange("O32:CI35");
 3. **GitHub Actions automatically:**
    - ✅ Builds the project
    - ✅ Creates production files
-   - ✅ Updates manifest URLs
+   - ✅ Uses `manifest-github.xml` as `manifest.xml` for client download
    - ✅ Deploys to GitHub Pages
    - ✅ Makes available at: `https://solanki0494.github.io/pinnacle-excel-addin`
 
-### Option 2: Traditional Server Deployment
+### Option 2: Manual Deployment (If GitHub Actions billing issue)
+
+```bash
+npm run deploy
+git add docs/
+git commit -m "Deploy to GitHub Pages"
+git push
+```
+
+Then enable GitHub Pages: Settings > Pages > Deploy from branch > main > /docs
+
+## Manifest Files
+
+The project uses two manifest files:
+
+- **`manifest.xml`** - For local development (localhost URLs)
+- **`manifest-github.xml`** - For GitHub Pages deployment (GitHub URLs)
+
+During deployment, `manifest-github.xml` is automatically copied as `manifest.xml` so clients download the correct version with GitHub Pages URLs.
+
+### Option 3: Traditional Server Deployment
 
 1. **Build for production:**
    ```bash
