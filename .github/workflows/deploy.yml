@@ -194,6 +194,9 @@ jobs:
           </html>
           EOF
 
+          # Replace the date placeholder with actual date
+          sed -i "s/\$(date +'%B %Y')/$(date +'%B %Y')/g" docs/index.html
+
       - name: Setup GitHub Pages manifest
         run: |
           # Copy GitHub-specific manifest as the main manifest.xml for client download

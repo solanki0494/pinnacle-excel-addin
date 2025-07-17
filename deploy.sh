@@ -165,11 +165,15 @@ cat > docs/index.html << 'EOF'
         <h2>Support</h2>
         <p>For technical support or questions about the add-in, contact your Pinnacle Real Estate IT administrator.</p>
         <p><strong>Version:</strong> 1.0.0<br>
-        <strong>Last Updated:</strong> January 2025</p>
+        <strong>Last Updated:</strong> $(date +'%B %Y')</p>
     </div>
 </body>
 </html>
 EOF
+
+# Replace the date placeholder with actual date
+sed -i.bak "s/\$(date +'%B %Y')/$(date +'%B %Y')/g" docs/index.html
+rm -f docs/index.html.bak
 
 # Copy installation guide if it exists
 echo "📖 Adding installation guide..."
