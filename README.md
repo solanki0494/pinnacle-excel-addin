@@ -112,27 +112,28 @@ const targetRange = engineeringSheet.getRange("O32:CI35");
 
 ## Deployment
 
-### Option 1: Automated GitHub Pages Deployment (Recommended)
+### Automated GitHub Pages Deployment
 
-**Fully automated serverless deployment!** No custom scripts needed:
+**Fully automated serverless deployment!** No servers, no custom scripts, no manual steps:
 
-1. **Push to GitHub:**
+1. **One-time setup:**
+   - Go to repository Settings > Pages
+   - Source: Select "GitHub Actions"
+   - Save
+
+2. **Deploy automatically:**
    ```bash
    git add .
    git commit -m "Update add-in"
    git push
    ```
 
-2. **Automatic Deployment:**
-   - GitHub Actions automatically builds and deploys
-   - No manual steps required
-   - Professional CI/CD pipeline
-   - Updates manifest URLs automatically
-
-3. **Enable GitHub Pages (one-time setup):**
-   - Go to repository Settings > Pages
-   - Source: "GitHub Actions"
-   - That's it! Fully automated from now on
+3. **GitHub Actions automatically:**
+   - ✅ Builds the project
+   - ✅ Creates production files
+   - ✅ Updates manifest URLs
+   - ✅ Deploys to GitHub Pages
+   - ✅ Makes available at: `https://solanki0494.github.io/pinnacle-excel-addin`
 
 ### Option 2: Traditional Server Deployment
 
