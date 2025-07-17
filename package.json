@@ -1,0 +1,46 @@
+{
+  "name": "pinnacle-real-estate-excel-addin",
+  "version": "1.0.0",
+  "description": "Excel add-in for Pinnacle Real Estate operating expenses calculation",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
+    "dev-server": "webpack serve --mode=development",
+    "start": "office-addin-debugging start manifest.xml",
+    "stop": "office-addin-debugging stop manifest.xml",
+    "validate": "office-addin-manifest validate manifest.xml",
+    "sideload": "office-addin-debugging start manifest.xml desktop",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "office-add-in",
+    "excel",
+    "real-estate",
+    "pinnacle"
+  ],
+  "author": "Pinnacle Real Estate",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "@types/office-js": "^1.0.518",
+    "office-addin-cli": "^2.0.3",
+    "office-addin-debugging": "^6.0.3",
+    "office-addin-dev-certs": "^2.0.3",
+    "office-addin-lint": "^3.0.3",
+    "office-addin-manifest": "^2.0.3",
+    "office-addin-prettier-config": "^2.0.1"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^13.0.0",
+    "file-loader": "^6.2.0",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.100.2",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2",
+    "xlsx": "^0.18.5"
+  }
+}

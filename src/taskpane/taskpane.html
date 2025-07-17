@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:; connect-src 'self' wss: https:;">
+    <title>Pinnacle Real Estate</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- Ensure Office.js is loaded before our scripts -->
+    <script type="text/javascript">
+        // Global flag to track Office.js loading
+        window.officeReady = false;
+
+        // Wait for Office.js to be available
+        function waitForOffice() {
+            if (typeof Office !== 'undefined' && Office.onReady) {
+                window.officeReady = true;
+                console.log('Office.js is ready');
+            } else {
+                setTimeout(waitForOffice, 100);
+            }
+        }
+
+        // Start checking for Office.js
+        waitForOffice();
+    </script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: #0078d4;
+            color: white;
+            padding: 15px;
+            margin: -20px -20px 20px -20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .button {
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .button:hover {
+            background-color: #106ebe;
+        }
+
+        .button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .status {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .chart-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #expenseChart {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>🏢 Pinnacle Real Estate</h1>
+        <p>Operating Expenses Calculator</p>
+    </div>
+
+    <div class="section">
+        <h3>📊 Quick Actions</h3>
+        <button class="button" id="runCalculation">
+            ▶️ Run Calculation
+        </button>
+    </div>
+
+    <div class="section">
+        <h3>📋 Status</h3>
+        <div id="status" class="status"></div>
+    </div>
+
+    <!-- Script will be injected by webpack -->
+</body>
+
+</html>
