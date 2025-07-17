@@ -133,18 +133,18 @@ jobs:
               </div>
 
               <div class="card">
-                  <h2>Features</h2>
+                  <h2>What It Does</h2>
                   <div class="feature">
-                      <span class="feature-icon">📋</span>
-                      <span>Copy Outputs sheet cashflow to Engineering sheet cashflow</span>
+                      <span class="feature-icon">�</span>
+                      <span>Copies cashflow data from <strong>"Outputs"</strong> sheet to <strong>"Software Engineer Cash Flow"</strong> sheet</span>
                   </div>
                   <div class="feature">
                       <span class="feature-icon">🔄</span>
-                      <span>Forces Excel recalculation before copying</span>
+                      <span>Forces Excel recalculation to ensure data is current</span>
                   </div>
                   <div class="feature">
-                      <span class="feature-icon">🎯</span>
-                      <span>Simple ribbon button interface</span>
+                      <span class="feature-icon">⚡</span>
+                      <span>One-click operation via ribbon button</span>
                   </div>
               </div>
 
