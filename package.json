@@ -11,6 +11,7 @@
     "stop": "office-addin-debugging stop manifest.xml",
     "validate": "office-addin-manifest validate manifest.xml",
     "sideload": "office-addin-debugging start manifest.xml desktop",
+    "deploy": "npm run build && echo 'Push to GitHub to trigger automated deployment'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

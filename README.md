@@ -112,27 +112,27 @@ const targetRange = engineeringSheet.getRange("O32:CI35");
 
 ## Deployment
 
-### Option 1: Serverless Deployment (Recommended)
+### Option 1: Automated GitHub Pages Deployment (Recommended)
 
-**No server required!** Deploy for free using GitHub Pages:
+**Fully automated serverless deployment!** No custom scripts needed:
 
-1. **Prepare serverless deployment:**
+1. **Push to GitHub:**
    ```bash
-   node deploy-serverless.js
+   git add .
+   git commit -m "Update add-in"
+   git push
    ```
 
-2. **Push to GitHub and enable Pages:**
-   - Create GitHub repository
-   - Push code to repository
-   - Enable GitHub Pages in Settings > Pages
-   - Choose `/docs` folder as source
+2. **Automatic Deployment:**
+   - GitHub Actions automatically builds and deploys
+   - No manual steps required
+   - Professional CI/CD pipeline
+   - Updates manifest URLs automatically
 
-3. **Update manifest URLs:**
-   - Edit `docs/manifest-github-pages.xml`
-   - Replace `YOUR-USERNAME` and `YOUR-REPO-NAME`
-   - Distribute updated manifest to users
-
-**See `SERVERLESS_DEPLOYMENT.md` for detailed instructions**
+3. **Enable GitHub Pages (one-time setup):**
+   - Go to repository Settings > Pages
+   - Source: "GitHub Actions"
+   - That's it! Fully automated from now on
 
 ### Option 2: Traditional Server Deployment
 

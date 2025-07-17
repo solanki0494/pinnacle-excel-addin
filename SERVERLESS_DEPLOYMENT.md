@@ -1,46 +1,44 @@
-# Serverless Deployment Guide
+# Automated Serverless Deployment Guide
 ## Pinnacle Real Estate Excel Add-in
 
 ### Overview
-This guide shows how to deploy the Excel add-in without any server using GitHub Pages (free static hosting).
+This guide shows how to deploy the Excel add-in using **fully automated GitHub Actions** - no custom scripts or manual steps required!
 
-## Option 1: GitHub Pages Deployment (Recommended)
+## ✅ Automated GitHub Actions Deployment (Recommended)
 
-### Step 1: Create GitHub Repository
-1. Create a new repository on GitHub (e.g., `pinnacle-excel-addin`)
-2. Push this project to the repository:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
-   git push -u origin main
-   ```
-
-### Step 2: Enable GitHub Pages
-1. Go to your repository on GitHub
+### Step 1: One-Time GitHub Pages Setup
+1. Go to your repository on GitHub: `https://github.com/solanki0494/pinnacle-excel-addin`
 2. Click **Settings** tab
 3. Scroll down to **Pages** section
-4. Under **Source**, select **Deploy from a branch**
-5. Choose **main** branch and **/docs** folder
-6. Click **Save**
-7. GitHub will provide your URL: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME`
+4. Under **Source**, select **"GitHub Actions"** (not "Deploy from a branch")
+5. Click **Save**
 
-### Step 3: Update Manifest URLs
-1. Open `docs/manifest-github-pages.xml`
-2. Replace all instances of:
-   - `YOUR-USERNAME` with your GitHub username
-   - `YOUR-REPO-NAME` with your repository name
-3. Save the file
+### Step 2: Automatic Deployment (Every Push)
+Every time you push code to the main branch:
 
-### Step 4: Test the Deployment
-1. Visit `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME`
-2. You should see the add-in landing page
-3. Test the manifest: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/manifest-github-pages.xml`
+```bash
+git add .
+git commit -m "Update add-in"
+git push
+```
 
-### Step 5: Distribute to Users
-1. Provide users with the updated `manifest-github-pages.xml` file
-2. Users install using Excel's **Insert > Get Add-ins > Upload My Add-in**
+**GitHub Actions automatically:**
+1. ✅ Builds the project (`npm run build`)
+2. ✅ Creates optimized production files
+3. ✅ Updates manifest URLs with correct GitHub Pages URLs
+4. ✅ Deploys to GitHub Pages
+5. ✅ Makes the add-in available at: `https://solanki0494.github.io/pinnacle-excel-addin`
+
+### Step 3: Zero Manual Work Required
+- **No custom scripts** to run
+- **No manifest editing** required
+- **No file copying** needed
+- **Professional CI/CD** pipeline handles everything
+
+### Step 4: Access Your Add-in
+- **Landing Page**: `https://solanki0494.github.io/pinnacle-excel-addin`
+- **Manifest File**: `https://solanki0494.github.io/pinnacle-excel-addin/manifest.xml`
+- **Installation Guide**: Available on the landing page
 
 ## Option 2: Other Static Hosting Services
 
