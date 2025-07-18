@@ -1,1 +1,80 @@
-(()=>{"use strict";var e={684:(e,o)=>{Object.defineProperty(o,"__esModule",{value:!0}),o.copyOperatingExpenses=async function(e){try{console.log("Starting operating expenses copy...");const o=e.workbook.worksheets.getItem("Outputs"),t=e.workbook.worksheets.getItem("Software Engineer Cash Flow"),n=o.getRange("O32:CI35"),a=t.getRange("O32:CI35");n.load("values"),await e.sync(),a.values=n.values,await e.sync(),console.log("Operating expenses copied successfully from Outputs to Engineering sheet")}catch(e){throw console.error("Error copying operating expenses:",e),e}},o.showNotification=async function(e,o){try{await Excel.run(async t=>{Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,console.log(`${e}: ${o}`)})}catch(t){console.log(`${e}: ${o}`)}}}},o={};function t(n){var a=o[n];if(void 0!==a)return a.exports;var i=o[n]={exports:{}};return e[n](i,i.exports,t),i.exports}t.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(e){if("object"==typeof window)return window}}(),(()=>{const e=t(684);!function e(){"undefined"!=typeof Office&&Office.onReady?Office.onReady(()=>{console.log("Office.js is ready for commands")}):(console.log("Office.js not ready for commands, retrying..."),setTimeout(e,100))}(),t.g.runCalculation=async function(o){try{await Excel.run(async t=>{console.log("Starting calculation from ribbon button..."),t.application.calculationMode=Excel.CalculationMode.automatic,t.application.calculate(Excel.CalculationType.full),await t.sync(),await new Promise(e=>setTimeout(e,500)),await(0,e.copyOperatingExpenses)(t),await(0,e.showNotification)("Calculation Complete","Operating expenses copied successfully!"),o.completed()})}catch(t){console.error("Error in runCalculation:",t);const n=t instanceof Error?t.message:String(t);await(0,e.showNotification)("Calculation Error",`Error: ${n}`),o.completed()}}})()})();
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/commands/commands.ts":
+/*!**********************************!*\
+  !*** ./src/commands/commands.ts ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("{\n/* global console, Excel, Office */\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst operatingExpensesService_1 = __webpack_require__(/*! ../services/operatingExpensesService */ \"./src/services/operatingExpensesService.ts\");\n// Initialize Office.js when ready\nfunction initializeOffice() {\n    if (typeof Office !== 'undefined' && Office.onReady) {\n        Office.onReady(() => {\n            console.log('Office.js is ready for commands');\n            // Office is ready - commands will be available\n        });\n    }\n    else {\n        console.log('Office.js not ready for commands, retrying...');\n        setTimeout(initializeOffice, 100);\n    }\n}\n// Start initialization\ninitializeOffice();\nasync function runCalculation(event) {\n    try {\n        await Excel.run(async (context) => {\n            console.log(\"Starting calculation from ribbon button...\");\n            context.application.calculationMode = Excel.CalculationMode.automatic;\n            context.application.calculate(Excel.CalculationType.full);\n            await context.sync();\n            await new Promise(resolve => setTimeout(resolve, 500));\n            await (0, operatingExpensesService_1.copyOperatingExpenses)(context);\n            await (0, operatingExpensesService_1.showNotification)(\"Calculation Complete\", \"Operating expenses copied successfully!\");\n            event.completed();\n        });\n    }\n    catch (error) {\n        console.error(\"Error in runCalculation:\", error);\n        const errorMessage = error instanceof Error ? error.message : String(error);\n        await (0, operatingExpensesService_1.showNotification)(\"Calculation Error\", `Error: ${errorMessage}`);\n        event.completed();\n    }\n}\n__webpack_require__.g.runCalculation = runCalculation;\n\n\n//# sourceURL=webpack://pinnacle-real-estate-excel-addin/./src/commands/commands.ts?\n}");
+
+/***/ }),
+
+/***/ "./src/services/operatingExpensesService.ts":
+/*!**************************************************!*\
+  !*** ./src/services/operatingExpensesService.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.copyOperatingExpenses = copyOperatingExpenses;\nexports.showNotification = showNotification;\nasync function copyOperatingExpenses(context) {\n    try {\n        console.log(\"Starting operating expenses copy...\");\n        const outputsSheet = context.workbook.worksheets.getItem(\"Outputs\");\n        const engineeringSheet = context.workbook.worksheets.getItem(\"Software Engineer Cash Flow\");\n        const sourceRange = outputsSheet.getRange(\"O32:CI35\");\n        const targetRange = engineeringSheet.getRange(\"O32:CI35\");\n        sourceRange.load(\"values\");\n        await context.sync();\n        targetRange.values = sourceRange.values;\n        await context.sync();\n        console.log(\"Operating expenses copied successfully from Outputs to Engineering sheet\");\n    }\n    catch (error) {\n        console.error(\"Error copying operating expenses:\", error);\n        throw error;\n    }\n}\nasync function showNotification(title, message) {\n    try {\n        await Excel.run(async (context) => {\n            const notification = {\n                type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,\n                message: message,\n                icon: \"icon1\",\n                persistent: false\n            };\n            console.log(`${title}: ${message}`);\n        });\n    }\n    catch (error) {\n        console.log(`${title}: ${message}`);\n    }\n}\n\n\n//# sourceURL=webpack://pinnacle-real-estate-excel-addin/./src/services/operatingExpensesService.ts?\n}");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/commands/commands.ts");
+/******/ 	
+/******/ })()
+;

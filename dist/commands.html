@@ -1,1 +1,39 @@
-<!doctype html><html><head><meta charset="UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge"/><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:; connect-src 'self' wss: https:;"><title>Pinnacle Real Estate Commands</title><script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script><script>function waitForOffice(){"undefined"!=typeof Office&&Office.onReady?(window.officeReady=!0,console.log("Office.js is ready for commands")):setTimeout(waitForOffice,100)}window.officeReady=!1,waitForOffice()</script></head><body><script src="commands.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:; connect-src 'self' wss: https:;">
+    <title>Pinnacle Real Estate Commands</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- Ensure Office.js is loaded before our scripts -->
+    <script type="text/javascript">
+        // Global flag to track Office.js loading
+        window.officeReady = false;
+
+        // Wait for Office.js to be available
+        function waitForOffice() {
+            if (typeof Office !== 'undefined' && Office.onReady) {
+                window.officeReady = true;
+                console.log('Office.js is ready for commands');
+            } else {
+                setTimeout(waitForOffice, 100);
+            }
+        }
+
+        // Start checking for Office.js
+        waitForOffice();
+    </script>
+</head>
+
+<body>
+    <!-- This page is used for ribbon commands and doesn't need visible content -->
+    <!-- Script will be injected by webpack -->
+<script src="commands.js"></script></body>
+
+</html>
