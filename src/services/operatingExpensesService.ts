@@ -76,9 +76,15 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
       throw new Error("Software Engineer Cash Flow sheet was not found after copying - this should not happen");
     }
 
+    // Activate the newly created Software Engineer Cash Flow sheet
+    const finalSheet = context.workbook.worksheets.getItem("Software Engineer Cash Flow");
+    finalSheet.activate();
+    await context.sync();
+
     console.log("✅ Successfully copied Outputs sheet to Software Engineer Cash Flow with perfect formatting");
     console.log("✅ All formulas converted to calculated values");
     console.log("✅ Colors, borders, fonts, and layout preserved exactly");
+    console.log("✅ Software Engineer Cash Flow sheet is now active and visible");
 
   } catch (error) {
     console.error("Error copying template:", error);
