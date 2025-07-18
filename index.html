@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Real Estate Excel Add-in</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #2980b9;
+        }
+        .download-section {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .download-btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        .download-btn:hover {
+            background: #2980b9;
+        }
+        .platform {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .path {
+            background: #2c3e50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            word-break: break-all;
+        }
+        .step {
+            background: #e8f5e8;
+            border-left: 4px solid #27ae60;
+            padding: 10px 15px;
+            margin: 10px 0;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        .feature-list {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .feature-list ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .feature-list li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏢 Pinnacle Real Estate Excel Add-in</h1>
+        
+        <div class="download-section">
+            <h2>📥 Download Add-in Manifest</h2>
+            <p>Download the manifest file to install the add-in:</p>
+            <a href="manifest.xml" class="download-btn" download="PinnacleRealEstate.xml">
+                📄 Download PinnacleRealEstate.xml
+            </a>
+        </div>
+
+        <h2>🚀 Installation Instructions</h2>
+        
+        <h3>Method 1: Sideloading (Recommended for Development)</h3>
+        
+        <div class="platform">
+            <h4>🍎 macOS</h4>
+            <div class="step">
+                <strong>Step 1:</strong> Copy the downloaded <code>PinnacleRealEstate.xml</code> file to:
+                <div class="path">/Users/&lt;username&gt;/Library/Containers/com.microsoft.Excel/Data/Documents/wef</div>
+            </div>
+            <div class="step">
+                <strong>Step 2:</strong> Open Excel and go to <strong>Insert</strong> → <strong>My Add-ins</strong>
+            </div>
+            <div class="step">
+                <strong>Step 3:</strong> Look for <strong>"Shared Folder"</strong> section and find the Pinnacle Real Estate add-in
+            </div>
+            <div class="step">
+                <strong>Step 4:</strong> Click <strong>"Add"</strong> to install the add-in
+            </div>
+        </div>
+
+        <div class="platform">
+            <h4>🪟 Windows</h4>
+            <div class="step">
+                <strong>Step 1:</strong> Copy the downloaded <code>PinnacleRealEstate.xml</code> file to:
+                <div class="path">C:\Users\&lt;username&gt;\AppData\Local\Microsoft\Office\Addins</div>
+            </div>
+            <div class="step">
+                <strong>Step 2:</strong> Open Excel and go to <strong>Insert</strong> → <strong>My Add-ins</strong>
+            </div>
+            <div class="step">
+                <strong>Step 3:</strong> Look for <strong>"Shared Folder"</strong> section and find the Pinnacle Real Estate add-in
+            </div>
+            <div class="step">
+                <strong>Step 4:</strong> Click <strong>"Add"</strong> to install the add-in
+            </div>
+        </div>
+
+        <h3>Method 2: Manual Upload</h3>
+        <div class="step">
+            <strong>Step 1:</strong> Open Excel and go to <strong>Insert</strong> → <strong>Get Add-ins</strong>
+        </div>
+        <div class="step">
+            <strong>Step 2:</strong> Click <strong>"Upload My Add-in"</strong>
+        </div>
+        <div class="step">
+            <strong>Step 3:</strong> Browse and select the downloaded <code>PinnacleRealEstate.xml</code> file
+        </div>
+        <div class="step">
+            <strong>Step 4:</strong> Click <strong>"Upload"</strong> to install the add-in
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Note:</strong> Make sure Excel is closed when copying files to the sideloading folders. Restart Excel after copying the manifest file.
+        </div>
+
+        <h2>✨ Features</h2>
+        <div class="feature-list">
+            <ul>
+                <li>🔄 <strong>Perfect Sheet Copy:</strong> Creates "Software Engineer Cash Flow" sheet with identical formatting</li>
+                <li>📊 <strong>Values-Only Data:</strong> Converts all formulas to calculated values for clean, standalone data</li>
+                <li>🎯 <strong>Auto-Activation:</strong> Automatically switches to the result sheet after processing</li>
+                <li>👁️ <strong>Smart Visibility:</strong> Ensures result sheet is always visible, even if source is hidden</li>
+                <li>🔄 <strong>Refresh Stabilization:</strong> Eliminates visual fluctuation during processing</li>
+                <li>🛡️ <strong>Error Handling:</strong> Comprehensive error handling with helpful notifications</li>
+            </ul>
+        </div>
+
+        <h2>🎮 How to Use</h2>
+        <div class="step">
+            <strong>Step 1:</strong> Ensure you have an "Outputs" sheet with your data in Excel
+        </div>
+        <div class="step">
+            <strong>Step 2:</strong> Look for the <strong>"Pinnacle Real Estate"</strong> tab in the Excel ribbon
+        </div>
+        <div class="step">
+            <strong>Step 3:</strong> Click the <strong>"Run"</strong> button to process your data
+        </div>
+        <div class="step">
+            <strong>Step 4:</strong> The add-in will create a "Software Engineer Cash Flow" sheet with formatted values
+        </div>
+
+        <h2>🔧 Troubleshooting</h2>
+        <div class="platform">
+            <h4>Add-in not appearing?</h4>
+            <ul>
+                <li>Make sure Excel is completely closed when copying the manifest file</li>
+                <li>Restart Excel after copying the file</li>
+                <li>Check that the file is in the correct folder for your operating system</li>
+                <li>Ensure the file is named exactly <code>PinnacleRealEstate.xml</code></li>
+            </ul>
+        </div>
+
+        <div class="platform">
+            <h4>Run button not working?</h4>
+            <ul>
+                <li>Make sure you have an "Outputs" sheet in your workbook</li>
+                <li>Check the browser console (F12) for error messages</li>
+                <li>Try refreshing the add-in by removing and re-adding it</li>
+            </ul>
+        </div>
+
+        <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; color: #666;">
+            <p>© 2024 Pinnacle Real Estate Excel Add-in | Built with ❤️ for efficient data processing</p>
+        </footer>
+    </div>
+</body>
+</html>
