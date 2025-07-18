@@ -80,6 +80,22 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
       console.warn("No used range found in copied sheet");
     }
 
+    // Force a refresh/recalculation of the copied sheet to ensure stability
+    console.log("Refreshing and recalculating the copied sheet...");
+    const finalSheet = context.workbook.worksheets.getItem("Software Engineer Cash Flow");
+
+    // Force recalculation of the entire workbook to ensure all values are current
+    context.workbook.application.calculate(Excel.CalculationType.full);
+    await context.sync();
+
+    // Refresh the sheet by selecting a cell and then clearing selection
+    const refreshRange = finalSheet.getRange("A1");
+    refreshRange.select();
+    await context.sync();
+
+    // Small delay to allow Excel to process the refresh
+    await new Promise(resolve => setTimeout(resolve, 100));
+
     // Final verification - check that the sheet exists in the workbook
     const finalWorksheets = context.workbook.worksheets;
     finalWorksheets.load("items/name");
@@ -90,15 +106,20 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
       throw new Error("Software Engineer Cash Flow sheet was not found after copying - this should not happen");
     }
 
-    // Activate the newly created Software Engineer Cash Flow sheet
-    const finalSheet = context.workbook.worksheets.getItem("Software Engineer Cash Flow");
+    // Activate the newly created Software Engineer Cash Flow sheet and set focus
     finalSheet.activate();
+    await context.sync();
+
+    // Set focus to A1 to ensure proper display
+    const focusRange = finalSheet.getRange("A1");
+    focusRange.select();
     await context.sync();
 
     console.log("✅ Successfully copied Outputs sheet to Software Engineer Cash Flow with perfect formatting");
     console.log("✅ All formulas converted to calculated values");
     console.log("✅ Colors, borders, fonts, and layout preserved exactly");
-    console.log("✅ Software Engineer Cash Flow sheet is now active and visible");
+    console.log("✅ Sheet refreshed and recalculated for stability");
+    console.log("✅ Software Engineer Cash Flow sheet is now active and focused");
     if (isOutputsHidden) {
       console.log("✅ Source sheet was hidden, but result sheet is kept visible for user access");
     }
