@@ -2,6 +2,19 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
   try {
     console.log("Starting template copy from Outputs to Software Engineer Cash Flow...");
 
+    // First, let's check what sheets exist in the workbook
+    const worksheets = context.workbook.worksheets;
+    worksheets.load("items/name");
+    await context.sync();
+
+    console.log("Available sheets:", worksheets.items.map(sheet => sheet.name));
+
+    // Check if Outputs sheet exists
+    const outputsSheetExists = worksheets.items.some(sheet => sheet.name === "Outputs");
+    if (!outputsSheetExists) {
+      throw new Error("The 'Outputs' sheet was not found. Please make sure the sheet exists and is named exactly 'Outputs'.");
+    }
+
     // Get the template sheet (Outputs)
     const templateSheet = context.workbook.worksheets.getItem("Outputs");
 
@@ -9,11 +22,13 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
     let targetSheet: Excel.Worksheet;
     let sheetExists = false;
 
-    try {
+    const engineeringSheetExists = worksheets.items.some(sheet => sheet.name === "Software Engineer Cash Flow");
+
+    if (engineeringSheetExists) {
       targetSheet = context.workbook.worksheets.getItem("Software Engineer Cash Flow");
       sheetExists = true;
       console.log("Software Engineer Cash Flow sheet exists, will clear and override");
-    } catch (error) {
+    } else {
       console.log("Creating new Software Engineer Cash Flow sheet");
       targetSheet = context.workbook.worksheets.add("Software Engineer Cash Flow");
       sheetExists = false;
@@ -33,6 +48,12 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
 
     // Get the used range from template sheet to copy structure and values
     const templateUsedRange = templateSheet.getUsedRange();
+
+    // Check if the template sheet has any content
+    if (!templateUsedRange) {
+      throw new Error("The 'Outputs' sheet appears to be empty. Please add some content to copy.");
+    }
+
     templateUsedRange.load(["values", "formulas", "format", "rowCount", "columnCount"]);
     await context.sync();
 
@@ -41,22 +62,39 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
     // Create target range of same size starting from A1
     const targetRange = targetSheet.getRangeByIndexes(0, 0, templateUsedRange.rowCount, templateUsedRange.columnCount);
 
-    // First copy all formatting from template to maintain appearance
-    await copyFormatting(templateUsedRange, targetRange, context);
+    try {
+      // First copy all formatting from template to maintain appearance
+      await copyFormatting(templateUsedRange, targetRange, context);
 
-    // Then copy calculated values (not formulas) from template
-    targetRange.values = templateUsedRange.values;
+      // Then copy calculated values (not formulas) from template
+      targetRange.values = templateUsedRange.values;
 
-    // Copy column widths and row heights for exact layout match
-    await copyDimensions(templateSheet, targetSheet, templateUsedRange, context);
+      // Copy column widths and row heights for exact layout match
+      await copyDimensions(templateSheet, targetSheet, templateUsedRange, context);
 
-    await context.sync();
+      await context.sync();
+    } catch (rangeError) {
+      console.error("Error during range operations:", rangeError);
+      throw new Error(`Failed to copy data: ${rangeError instanceof Error ? rangeError.message : String(rangeError)}`);
+    }
 
     console.log("Successfully copied template structure, formatting, and calculated values to Software Engineer Cash Flow sheet");
 
   } catch (error) {
     console.error("Error copying template:", error);
-    throw error;
+
+    // Provide more helpful error messages
+    if (error instanceof Error) {
+      if (error.message.includes("doesn't exist")) {
+        throw new Error("Sheet not found. Please ensure both 'Outputs' sheet exists in your workbook.");
+      } else if (error.message.includes("empty")) {
+        throw error; // Re-throw our custom empty sheet message
+      } else {
+        throw new Error(`Template copy failed: ${error.message}`);
+      }
+    } else {
+      throw new Error("An unexpected error occurred while copying the template.");
+    }
   }
 }
 
