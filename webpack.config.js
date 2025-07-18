@@ -68,7 +68,7 @@ module.exports = {
       }
     ],
     port: 3000,
-    server: 'https',
+    server: 'http',
     open: false,
     hot: true,
     compress: true,
