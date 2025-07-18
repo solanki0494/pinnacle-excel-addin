@@ -25,9 +25,17 @@
   <Hosts>
     <Host Name="Workbook" />
   </Hosts>
+
+  <Requirements>
+    <Sets>
+      <Set Name="ExcelApi" MinVersion="1.7"/>
+    </Sets>
+  </Requirements>
+
   <DefaultSettings>
     <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
   </DefaultSettings>
+
   <Permissions>ReadWriteDocument</Permissions>
   <!-- End TaskPane Mode integration.  -->
 
@@ -42,7 +50,13 @@
       <Host xsi:type="Workbook">
         <!-- Form factor. Currently only DesktopFormFactor is supported. -->
         <DesktopFormFactor>
-          <!-- Function file is a HTML page that includes the JavaScript where functions for ExecuteAction will be called. 
+          <GetStarted>
+            <Title resid="Pinnacle.GetStarted.Title"/>
+            <Description resid="Pinnacle.GetStarted.Description"/>
+            <LearnMoreUrl resid="Pinnacle.GetStarted.LearnMoreUrl"/>
+          </GetStarted>
+
+          <!-- Function file is a HTML page that includes the JavaScript where functions for ExecuteAction will be called.
                Think of the FunctionFile as the code behind ExecuteFunction. -->
           <FunctionFile resid="Commands.Url" />
 
@@ -113,18 +127,21 @@
       <bt:Urls>
         <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
+        <bt:Url id="Pinnacle.GetStarted.LearnMoreUrl" DefaultValue="https://localhost:3000"/>
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="Pinnacle.Tab.Label" DefaultValue="Pinnacle Real Estate"/>
-        <bt:String id="Pinnacle.Group.Label" DefaultValue="Operating Expenses"/>
-        <bt:String id="Pinnacle.TaskpaneButton.Label" DefaultValue="Show Taskpane"/>
-        <bt:String id="Pinnacle.RunButton.Label" DefaultValue="Run"/>
+        <bt:String id="Pinnacle.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
+        <bt:String id="Pinnacle.RunButton.Label" DefaultValue="Run" />
+        <bt:String id="Pinnacle.Group.Label" DefaultValue="Operating Expenses" />
+        <bt:String id="Pinnacle.Tab.Label" DefaultValue="Pinnacle Real Estate" />
+        <bt:String id="Pinnacle.GetStarted.Title" DefaultValue="Get started with Pinnacle Real Estate add-in!" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="Pinnacle.TaskpaneButton.Tooltip" DefaultValue="Opens the Pinnacle Real Estate taskpane"/>
-        <bt:String id="Pinnacle.RunButton.Tooltip" DefaultValue="Recalculate operating expenses and update cash flow"/>
+        <bt:String id="Pinnacle.TaskpaneButton.Tooltip" DefaultValue="Click to Show the taskpane" />
+        <bt:String id="Pinnacle.RunButton.Tooltip" DefaultValue="Click to run operating expenses calculation" />
+        <bt:String id="Pinnacle.GetStarted.Description" DefaultValue="Your sample add-in loaded successfully. Go to the HOME tab and click the 'Show Taskpane' button to get started." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

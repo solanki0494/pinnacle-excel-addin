@@ -93,7 +93,7 @@
                   </Icon>
 
                   <Action xsi:type="ExecuteFunction">
-                    <FunctionName>runOperatingExpensesCalculation</FunctionName>
+                    <FunctionName>runCalculation</FunctionName>
                   </Action>
                 </Control>
               </Group>
