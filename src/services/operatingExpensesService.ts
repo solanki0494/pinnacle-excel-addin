@@ -33,6 +33,12 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
     // Simple approach: Copy the entire Outputs sheet and then convert formulas to values
     console.log("Using sheet copy approach for perfect formatting preservation");
 
+    // Check if the Outputs sheet is hidden before copying
+    templateSheet.load("visibility");
+    await context.sync();
+
+    const isOutputsHidden = templateSheet.visibility === Excel.SheetVisibility.hidden;
+
     // If the target sheet already exists, delete it first
     if (sheetExists) {
       console.log("Deleting existing Software Engineer Cash Flow sheet");
@@ -40,11 +46,19 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
       existingSheet.delete();
       await context.sync();
     }
+    console.log(`Outputs sheet visibility: ${templateSheet.visibility} (hidden: ${isOutputsHidden})`);
 
     // Copy the entire Outputs sheet
     console.log("Copying Outputs sheet...");
     const copiedSheet = templateSheet.copy(Excel.WorksheetPositionType.after, templateSheet);
     copiedSheet.name = "Software Engineer Cash Flow";
+
+    // If the source sheet was hidden, make sure the copied sheet is visible
+    if (isOutputsHidden) {
+      console.log("Source sheet was hidden, ensuring Software Engineer Cash Flow sheet is visible");
+      copiedSheet.visibility = Excel.SheetVisibility.visible;
+    }
+
     await context.sync();
 
     console.log("Sheet copied successfully, now converting formulas to values...");
@@ -85,6 +99,9 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
     console.log("✅ All formulas converted to calculated values");
     console.log("✅ Colors, borders, fonts, and layout preserved exactly");
     console.log("✅ Software Engineer Cash Flow sheet is now active and visible");
+    if (isOutputsHidden) {
+      console.log("✅ Source sheet was hidden, but result sheet is kept visible for user access");
+    }
 
   } catch (error) {
     console.error("Error copying template:", error);
