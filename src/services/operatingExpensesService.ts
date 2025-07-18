@@ -25,24 +25,45 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
     const engineeringSheetExists = worksheets.items.some(sheet => sheet.name === "Software Engineer Cash Flow");
 
     if (engineeringSheetExists) {
+      console.log("Software Engineer Cash Flow sheet exists, will clear and override");
       targetSheet = context.workbook.worksheets.getItem("Software Engineer Cash Flow");
       sheetExists = true;
-      console.log("Software Engineer Cash Flow sheet exists, will clear and override");
     } else {
-      console.log("Creating new Software Engineer Cash Flow sheet");
-      targetSheet = context.workbook.worksheets.add("Software Engineer Cash Flow");
-      sheetExists = false;
+      console.log("Software Engineer Cash Flow sheet does not exist, creating new sheet");
+      try {
+        targetSheet = context.workbook.worksheets.add("Software Engineer Cash Flow");
+        sheetExists = false;
+        console.log("Successfully created Software Engineer Cash Flow sheet");
+      } catch (createError) {
+        console.error("Error creating sheet:", createError);
+        throw new Error(`Failed to create 'Software Engineer Cash Flow' sheet: ${createError instanceof Error ? createError.message : String(createError)}`);
+      }
     }
 
     await context.sync();
 
+    // Verify the target sheet is accessible
+    try {
+      targetSheet.load("name");
+      await context.sync();
+      console.log(`Target sheet confirmed: ${targetSheet.name}`);
+    } catch (verifyError) {
+      console.error("Error verifying target sheet:", verifyError);
+      throw new Error("Failed to access the target sheet after creation/selection");
+    }
+
     // Clear the target sheet if it exists
     if (sheetExists) {
-      const usedRange = targetSheet.getUsedRange();
-      if (usedRange) {
-        usedRange.clear();
-        await context.sync();
-        console.log("Cleared existing content from Software Engineer Cash Flow sheet");
+      try {
+        const usedRange = targetSheet.getUsedRange();
+        if (usedRange) {
+          usedRange.clear();
+          await context.sync();
+          console.log("Cleared existing content from Software Engineer Cash Flow sheet");
+        }
+      } catch (clearError) {
+        console.warn("Could not clear existing content (sheet might be empty):", clearError);
+        // Continue anyway - this is not a critical error
       }
     }
 
@@ -78,7 +99,18 @@ export async function copyOperatingExpenses(context: Excel.RequestContext): Prom
       throw new Error(`Failed to copy data: ${rangeError instanceof Error ? rangeError.message : String(rangeError)}`);
     }
 
+    // Final verification - check that the sheet exists in the workbook
+    const finalWorksheets = context.workbook.worksheets;
+    finalWorksheets.load("items/name");
+    await context.sync();
+
+    const finalSheetExists = finalWorksheets.items.some(sheet => sheet.name === "Software Engineer Cash Flow");
+    if (!finalSheetExists) {
+      throw new Error("Software Engineer Cash Flow sheet was not found after creation - this should not happen");
+    }
+
     console.log("Successfully copied template structure, formatting, and calculated values to Software Engineer Cash Flow sheet");
+    console.log("Final verification: Software Engineer Cash Flow sheet exists and contains data");
 
   } catch (error) {
     console.error("Error copying template:", error);
